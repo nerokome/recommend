@@ -12,13 +12,13 @@ const {
   TWITTER_BEARER,
 } = process.env;
 
-// Email setup
+
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: { user: EMAIL_USER, pass: EMAIL_PASS },
 });
 
-// WhatsApp setup
+
 const client = twilio(TWILIO_SID, TWILIO_AUTH);
 
 export const sendRecommendation = async (req, res) => {
@@ -46,7 +46,7 @@ export const sendRecommendation = async (req, res) => {
       await axios.post(
         `https://graph.facebook.com/v17.0/me/messages?access_token=${FB_PAGE_ACCESS_TOKEN}`,
         {
-          recipient: { id: to }, // Facebook PSID
+          recipient: { id: to }, 
           message: { text: message },
         }
       );
@@ -60,9 +60,9 @@ export const sendRecommendation = async (req, res) => {
       );
     }
 
-    res.json({ success: true, message: `✅ Sent via ${channel}` });
+    res.json({ success: true, message: ` Sent via ${channel}` });
   } catch (error) {
     console.error(error.response?.data || error.message);
-    res.status(500).json({ success: false, error: "❌ Failed to send" });
+    res.status(500).json({ success: false, error: " Failed to send" });
   }
 };
